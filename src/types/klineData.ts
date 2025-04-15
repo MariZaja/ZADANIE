@@ -1,4 +1,4 @@
-export interface klineData {
+export interface KlineData {
   klineOpenTime: string;
   openPrice: number;
   highPrice: number;
