@@ -12,7 +12,7 @@ router.get("/price-analysis/:symbol/:interval", async (req, res) => {
 
     res.json(analysis);
   } catch (e) {
-    res.status(500).send("Failed to fetch/store trades" + e);
+    res.status(500).send("Failed to analyze price changes :" + e);
   }
 });
 
