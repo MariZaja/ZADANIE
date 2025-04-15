@@ -10,7 +10,7 @@ router.get("/price-analysis/:symbol/:interval", async (req, res) => {
     const klines = await fetchMarketData(symbol.toUpperCase(), interval);
     const analysis = analyzePriceChanges(klines);
 
-    res.send();
+    res.json(analysis);
   } catch (e) {
     res.status(500).send("Failed to fetch/store trades" + e);
   }
