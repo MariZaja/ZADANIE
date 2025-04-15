@@ -1,12 +1,18 @@
 import { Router } from "express";
+import { fetchMarketData } from "../services/marketData.service";
+import { analyzePriceChanges } from "../services/analyzePriceChange";
 
 const router = Router();
 
-router.get("/fetch/:symbol/:interval", async (req, res) => {
+router.get("/price-analysis/:symbol/:interval", async (req, res) => {
   try {
-    res.send("Trades fetched and stored");
+    const { symbol, interval } = req.params;
+    const klines = await fetchMarketData(symbol.toUpperCase(), interval);
+    const analysis = analyzePriceChanges(klines);
+
+    res.json(analysis);
   } catch (e) {
-    res.status(500).send("Failed to fetch/store trades" + e);
+    res.status(500).send("Failed to analyze price changes :" + e);
   }
 });
 
